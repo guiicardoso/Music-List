@@ -13,7 +13,7 @@ tasks = [
 def home():
     return render_template('home.html', tasks = tasks)
 
-@app.route('/create', methods={'POST'})
+@app.route('/create', methods=['POST'])
 def create():
     name = request.form['name']
     task = {'name': name, 'finished': False}
