@@ -1,23 +1,57 @@
-<html> 
+<html>
     <head>
         <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <!-- css importado do bootstrap https://getbootstrap.com/ -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">    <body>
     </head>
     <body>
-        <br/>
-        <form class="container" action="create" method="POST">
-            <input name='name' class='form-control' > </input>
-            <button class='btn btn-primary'> Salvar  </button>
-        </form>
-
-        <table class="table table-hover">
+        <!-- container - layout basico de bloco do bootstrap para definir tamanho com base na tela -->
+        <div class="container">
+            <br/>
             
-            {% for task in tasks: %}
-            <tr>
-                <td> {{task['name']}} </td>
-                <td> {{task['finished']}} </td>
-            </tr>
-            {% endfor %}
-        </table>
+            <!-- estilizacao por linha -->
+            <form class="row" action="create" method='POST'>
+                <!-- coluna de tamanho automatico -->
+                <div class="col-auto">
+                    <!-- estilizacao para formulario -->
+                    <!-- placeholder - valor predefinido de mascara -->
+                    <input class="form-control" name='name' class='form-control col' placeholder="digite sua musica" value=""/>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" >Salvar</button>
+                </div>
+            </form>
+
+            <table class="table table-hover table-striped">
+
+                {% if musicas %}
+                <thead class="table-dark">
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Excluir</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for musica in musicas: %}
+                    <tr>
+                        <td> {{musica['name']}}</td>
+                        <td style="display: none;" class="visually-hidden"> {{musica['finished']}}</td>
+                        <td><a href='/Deletar/{{musica["name"]}}'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </td>
+                    </tr>
+                    {% endfor %}        
+                  </tbody>
+                {% else %}
+                    <tr>
+                        <td> Não há nenhuma musica...</td>
+                    </tr>    
+                {% endif %}
+            </table>
+        </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </html>
