@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+body{
+    background-image: url(../templates/purple.jpg);
+    
+}
+
+.h1{
+    position: absolute;
+    top: 45;
+}
+
